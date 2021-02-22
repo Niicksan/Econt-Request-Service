@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello Customer!{% endblock %}
+
+{% block body %}
+    {% for shipment in shipments %}
+        <h3>Shipment ID: {{ shipment.id }}</h3>
+        <p>From city: <span style="font-weight: bold">{{ shipment.cityFrom }}</span></p>
+        <p>To city: <span style="font-weight: bold">{{ shipment.cityTo }}</span></p>
+        <p>Shipment price: <span style="font-weight: bold">{{ shipment.price}} {{ shipment.currency }}</span></p>
+    {% endfor %}
+{% endblock %}

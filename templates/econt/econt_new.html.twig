@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello Customer!{% endblock %}
+
+{% set string = "some data \n from \n database" %}
+
+{% block body %}
+    {{ form_start(form, {'method': 'POST'}) }}
+        {{ form_errors(form) }}
+
+        {{ form_widget(form) }}
+
+    {{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascripts %}
+
+{% endblock %}

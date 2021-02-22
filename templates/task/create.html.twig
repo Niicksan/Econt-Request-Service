@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TaskController!{% endblock %}
+
+{% block body %}
+    {{ form_start(form, {'method': 'POST'}) }}
+    <div class="my-custom-class-for-errors">
+        {{ form_errors(form) }}
+    </div>
+
+    <div class="row">
+        <div class="col">
+            {{ form_row(form.title, {'label': 'Title'}) }}
+        </div>
+        <div class="col">
+            {{ form_row(form.dueDate, { 'label': 'Deadline'}) }}
+        </div>
+        <div class="col">
+            {{ form_row(form.task, { 'label': 'Description'}) }}
+        </div>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

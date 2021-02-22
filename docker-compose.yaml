@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  db:
+    image: library/mysql:8.0.23
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: yolo
+      MYSQL_DATABASE: mytests
+      MYSQL_USER: nik
+      MYSQL_PASSWORD: yolo
+    ports: [3306]
