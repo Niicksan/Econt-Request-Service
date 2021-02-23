@@ -6,19 +6,19 @@ use Psr\Log\LoggerInterface;
 
 class EcontGetCitiesService {
 
-    public $resultCities;
     private $logger;
+    private $econtRequestService;
+    public $resultCities;
 
     public function __construct(LoggerInterface $logger, EcontRequestService $econtRequestService)
     {
         $this->logger = $logger;
-        $this->resultCities = $this->getCities($econtRequestService);
+        $this->econtRequestService = $econtRequestService;
+        $this->resultCities = $this->getCities();
     }
 
-    private function getCities($econtRequestService)
+    private function getCities()
     {
-        $resultCities = $econtRequestService->econtRequest("Nomenclatures/NomenclaturesService.getCities.json", array('countryCode' => 'BGR'));
-
-        return $resultCities;
+        return $this->econtRequestService->econtRequest("Nomenclatures/NomenclaturesService.getCities.json", array('countryCode' => 'BGR'));
     }
 }

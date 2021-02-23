@@ -5,14 +5,17 @@ namespace App\Services;
 
 
 use Psr\Log\LoggerInterface;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class EcontRequestService
 {
     private $logger;
+    private $client;
 
-    public function __construct(LoggerInterface $logger)
+    public function __construct(LoggerInterface $logger, HttpClientInterface $client)
     {
         $this->logger = $logger;
+        $this->client = $client;
     }
 
     public function econtRequest($method, $params = array(), $timeout = 10) {
@@ -44,6 +47,27 @@ class EcontRequestService
         $jsonResponse = json_decode($response,true);
 
         return $jsonResponse;
+    }
+
+    public function fetchGitHubInformation(): array {
+        $response = $this->client->request(
+            'GET',
+            'https://demo.econt.com/ee/services', [
+                'headers' => [
+                    'Accept' => 'application/json',
+                ]
+        ]);
+
+        dump($statusCode = $response->getStatusCode());
+        // $statusCode = 200
+        dump($contentType = $response->getHeaders()['content-type'][0]);
+        // $contentType = 'application/json'
+        dump($content = $response->getContent());
+        // $content = '{"id":521583, "name":"symfony-docs", ...}'
+        $content = $response->toArray();
+        // $content = ['id' => 521583, 'name' => 'symfony-docs', ...]
+
+        return $content;
     }
 
     private static function flattenError($err) {

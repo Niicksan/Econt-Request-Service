@@ -20,7 +20,7 @@ class EcontController extends AbstractController
      * @param EcontGetCitiesService $citiesService
      * @return Response
      */
-    public function index(Request $request, EcontGetCitiesService $econtGetCitiesService, EcontCalculatePriceService $calculatePriceService, EcontRequestService $requestService): Response
+    public function index(Request $request, EcontGetCitiesService $econtGetCitiesService, EcontCalculatePriceService $calculatePriceService): Response
     {
         $citiesService = $econtGetCitiesService->resultCities; // Всички градове от еконт
 
@@ -49,7 +49,7 @@ class EcontController extends AbstractController
             $cityTo = $city;
             $cityToPostCode = $postCode;
 
-            $resultPrice = $calculatePriceService->calculatePrice($cityFrom, $cityFromPostCode, $cityTo, $cityToPostCode, $requestService);
+            $resultPrice = $calculatePriceService->calculatePrice($cityFrom, $cityFromPostCode, $cityTo, $cityToPostCode);
 
             $shipment -> setCityFrom($cityFrom);
             $shipment -> setCityTo($cityTo);
