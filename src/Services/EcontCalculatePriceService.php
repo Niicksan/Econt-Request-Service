@@ -17,7 +17,7 @@ class EcontCalculatePriceService
         $this->requestService = $requestService;
     }
 
-    public function calculatePrice(string $cityFrom, string $cityFromPostCode, string $cityTo, string $cityToPostCode)
+    public function calculatePrice(string $cityFrom, string $cityFromPostCode, string $cityTo, string $cityToPostCode, float $weight)
     {
         $arrObj = array (
             'label' => array(
@@ -33,8 +33,8 @@ class EcontCalculatePriceService
                         'name' => $cityFrom,
                         'postCode' => $cityFromPostCode
                     ),
-                    'street' => 'Димитър Димитров',
-                    'num' => '7'
+                    'street' => 'Цар Самуил',
+                    'num' => '74'
                 ),
                 'receiverClient' => array(
                     'name' => 'Димитър Димитров',
@@ -48,13 +48,12 @@ class EcontCalculatePriceService
                         'name' => $cityTo,
                         'postCode' => $cityToPostCode
                     ),
-                    'street' => 'Муткурова',
-                    'num' => '84',
-                    'other' => 'бл. 5, вх. А, ет. 6'
+                    'street' => 'Свети Свети Кирил и Методий',
+                    'num' => '10',
                 ),
                 'packCount' => 1,
                 'shipmentType' => 'PACK',
-                'weight' => 5,
+                'weight' => $weight,
                 'shipmentDescription' => 'пратка с описание',
             ),
             'mode' => 'calculate'

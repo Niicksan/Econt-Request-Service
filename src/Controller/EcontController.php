@@ -6,7 +6,6 @@ use App\Entity\Shipment;
 use App\Form\EcontCitiesType;
 use App\Services\EcontCalculatePriceService;
 use App\Services\EcontGetCitiesService;
-use App\Services\EcontRequestService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,12 +21,9 @@ class EcontController extends AbstractController
      */
     public function index(Request $request, EcontGetCitiesService $econtGetCitiesService, EcontCalculatePriceService $calculatePriceService): Response
     {
-        $citiesService = $econtGetCitiesService->resultCities; // Всички градове от еконт
+        $cities = $econtGetCitiesService->resultCities; // Всички градове от еконт
 
-        //$result = $this->econtRequest("Nomenclatures/NomenclaturesService.getOffices.json"); // Всички оофиси от еконт
-
-        //$citiesInfo= $this->getCitiiesInfo($citiesService); // Информация, id на град, код на града и име на града
-        $citiesName = $this->getCitiiesNames($citiesService); // Имена на градавете + пощенските кодове (просто тест)
+        ($citiesName = $this->getCitiiesNames($cities)); // Имена на градавете + пощенските кодове (просто тест)
 
         $shipment = new Shipment();
         $form = $this->createForm(EcontCitiesType::class, $citiesName);
@@ -39,6 +35,7 @@ class EcontController extends AbstractController
 
             $cityFromData = $data['from'];
             $cityToData = $data['to'];
+            $weight = floatval($data['weight']);
 
             //Parse input Data
             list($postCode, $city) = preg_split('[ ]', $cityFromData);
@@ -49,7 +46,7 @@ class EcontController extends AbstractController
             $cityTo = $city;
             $cityToPostCode = $postCode;
 
-            $resultPrice = $calculatePriceService->calculatePrice($cityFrom, $cityFromPostCode, $cityTo, $cityToPostCode);
+            $resultPrice = $calculatePriceService->calculatePrice($cityFrom, $cityFromPostCode, $cityTo, $cityToPostCode, $weight);
 
             $shipment -> setCityFrom($cityFrom);
             $shipment -> setCityTo($cityTo);
@@ -84,16 +81,12 @@ class EcontController extends AbstractController
 //        return $citiesInfo;
 //    }
 
-    private function getCitiiesNames($resultCities)
+    private function getCitiiesNames($cities)
     {
-        $citiesName = [];
+        foreach ($cities['cities'] as $city) {
 
-        foreach ($resultCities['cities'] as $city) {
-            if ($city['country']['code3'] == 'BGR')
-            {
-                $label = $city['postCode'] . ' ' . $city['name'];
-                $citiesName[$label] = $label;
-            }
+            $label = $city['postCode'] . ' ' . $city['name'];
+            $citiesName[$label] = $label;
         }
 
         return $citiesName;

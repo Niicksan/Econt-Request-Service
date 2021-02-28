@@ -18,3 +18,25 @@ framework:
 
     form:
         legacy_error_messages: false
+
+    http_client:
+        default_options:
+            http_version: '2.0'
+        scoped_clients:
+            econt_api_dev:
+                # testing endpoint
+                base_uri: 'https://demo.econt.com/ee/services'
+                headers:
+                    Accept: 'application/json'
+
+                # HTTP Basic authentication
+                auth_basic: 'iasp-dev:iasp-dev'
+
+            econt_api_prod:
+                # production endpoint
+                base_uri: 'https://ee.econt.com/services'
+                headers:
+                    Accept: 'application/json'
+
+                # HTTP Basic authentication
+                auth_basic: 'iasp-dev:iasp-dev'
