@@ -5,8 +5,8 @@ namespace App\Services;
 use Psr\Log\LoggerInterface;
 
 class EcontGetOfficesService {
-    private  $logger;
-    private  $econtRequestService;
+    private $logger;
+    private $econtRequestService;
     public array $resultOffices;
 
     public function __construct(LoggerInterface $logger, EcontRequestService $econtRequestService)
