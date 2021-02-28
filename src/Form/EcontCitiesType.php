@@ -25,7 +25,9 @@ class EcontCitiesType extends AbstractType
             ->add('weight', TextType::class, [
                 'required' => true,
                 'label' => 'Weight',
-                'data' => 'Enter weight in kg'
+                'attr' => [
+                    'placeholder' => 'Enter weight in kg'
+                ]
             ])
             ->add('submit', SubmitType::class)
             ->getForm();
