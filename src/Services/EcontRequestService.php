@@ -1,11 +1,9 @@
 <?php
 
-
 namespace App\Services;
 
 use Psr\Log\LoggerInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
-use Symfony\Component\HttpClient\NativeHttpClient;
 
 class EcontRequestService
 {
@@ -77,7 +75,7 @@ class EcontRequestService
                 'verify_peer' => false,
                 'verify_host' => false,
                 'json' => $params,
-                'timeout' => !empty($timeout) && intval($timeout) ? $timeout : 10,
+                'timeout' => !empty($timeout) && intval($timeout) ? $timeout : 4,
             ]
         );
 
