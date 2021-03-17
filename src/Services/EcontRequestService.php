@@ -59,7 +59,7 @@ class EcontRequestService
 //        }
 //    }
 
-    public function econtRequest($method, $params = array(), $timeout = 10) {
+    public function econtRequest($method, $params = array(), $timeout = 20) {
         //production endpoint
         //$endpoint = 'https://ee.econt.com/services';
 
@@ -75,7 +75,7 @@ class EcontRequestService
                 'verify_peer' => false,
                 'verify_host' => false,
                 'json' => $params,
-                'timeout' => !empty($timeout) && intval($timeout) ? $timeout : 4,
+                'timeout' => !empty($timeout) && intval($timeout) ? $timeout : 10,
             ]
         );
 

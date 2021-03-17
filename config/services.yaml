@@ -5,6 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
 
+
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -30,15 +31,12 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    app.econtrequestservice:
-        class: App\Services\EcontRequestService
-        public: true
+    # # # # # # # # # # EcontCalculatePrice # # # # # # # # # #
+    App\Services\EcontCalculatePriceService:
+        arguments:
+            $econtRequest: '@App\Services\EcontRequestService'
 
-    App\Services\EcontRequestService: '@app.econtrequestservice'
-
-    app.econtcalculatepriceservice:
-        class: App\Services\EcontCalculatePriceService
-
-        public: true
-
-    App\Services\EcontCalculatePriceService: '@app.econtcalculatepriceservice'
+   # # # # # # # # # # EcontGetCities # # # # # # # # # #
+    App\Services\EcontGetCitiesService:
+        arguments:
+            $econtRequest: '@App\Services\EcontRequestService'

@@ -6,18 +6,16 @@ use Psr\Log\LoggerInterface;
 
 class EcontGetOfficesService {
     private $logger;
-    private $econtRequestService;
-    public array $resultOffices;
+    private $econtRequest;
 
-    public function __construct(LoggerInterface $logger, EcontRequestService $econtRequestService)
+    public function __construct(LoggerInterface $logger, EcontRequestService $econtRequest)
     {
         $this->logger = $logger;
-        $this->econtRequestService = $econtRequestService;
-        $this->resultOffices = $this->getOffices();
+        $this->econtRequest = $econtRequest;
     }
 
-    private function getOffices()
+    public function getOffices(string $cityID)
     {
-        return $this->econtRequestService->econtRequest("Nomenclatures/NomenclaturesService.getOffices.json", array('countryCode' => 'BGR'));
+        return $this->econtRequest->econtRequest("Nomenclatures/NomenclaturesService.getOffices.json", array('countryCode' => 'BGR', 'cityID' => $cityID));
     }
 }

@@ -7,12 +7,12 @@ use Psr\Log\LoggerInterface;
 class EcontCalculatePriceService
 {
     private $logger;
-    private $requestService;
+    private $econtRequest;
 
-    public function __construct(LoggerInterface $logger, EcontRequestService $requestService)
+    public function __construct(LoggerInterface $logger, EcontRequestService $econtRequest)
     {
         $this->logger = $logger;
-        $this->requestService = $requestService;
+        $this->econtRequest = $econtRequest;
     }
 
     public function calculatePrice(string $cityFrom, string $cityFromPostCode, string $cityTo, string $cityToPostCode, float $weight)
@@ -57,6 +57,6 @@ class EcontCalculatePriceService
             'mode' => 'calculate'
         );
 
-        return $this->requestService->econtRequest("Shipments/LabelService.createLabel.json", $arrObj);
+        return $this->econtRequest->econtRequest("Shipments/LabelService.createLabel.json", $arrObj);
     }
 }

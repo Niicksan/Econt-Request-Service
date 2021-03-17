@@ -1,0 +1,28 @@
+{
+  "name": "econt",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Niicksan/Econt-Request-Service.git"
+  },
+  "author": "Nik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Niicksan/Econt-Request-Service/issues"
+  },
+  "homepage": "https://github.com/Niicksan/Econt-Request-Service#readme",
+  "devDependencies": {
+    "@symfony/webpack-encore": "^1.1.2"
+  },
+  "dependencies": {
+    "jquery": "^3.6.0"
+  }
+}
